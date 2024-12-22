@@ -1,4 +1,4 @@
 #!/bin/bash
-docker compose up -d --build
-docker exec ubuntu make
-docker exec -it ubuntu make qemu-nox
+docker compose up -d
+docker exec xv6-container make
+docker exec -it xv6-container make qemu-nox
