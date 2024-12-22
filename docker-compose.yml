@@ -1,0 +1,10 @@
+services:
+  ubuntu:
+    build: .
+    container_name: xv6-container
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    cap_add:
+      - NET_ADMIN  # Add the NET_ADMIN capability
+    volumes:
+        - ./xv6-public:/home/ubuntu/xv6-public
