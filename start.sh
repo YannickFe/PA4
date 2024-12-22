@@ -1,4 +1,7 @@
 #!/bin/bash
 docker compose up -d
-docker exec xv6-container make
-docker exec -it xv6-container make qemu-nox
+
+container_name=$(docker compose ps --format json | jq -r '.Name')
+
+docker exec $container_name make
+docker exec -it $container_name make qemu-nox
