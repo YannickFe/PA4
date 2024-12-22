@@ -1,4 +1,5 @@
 #!/bin/bash
+docker compose down
 docker compose up -d
 
 container_name=$(docker compose ps --format json | jq -r '.Name')
