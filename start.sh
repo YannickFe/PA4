@@ -12,6 +12,7 @@ docker compose down
 docker compose up -d
 
 container_name=$(docker compose ps --format json | jq -r '.Name')
+echo "Container name: $container_name"
 
 docker exec $container_name make
 docker exec -it $container_name make CPUS=$CPUS qemu-nox
