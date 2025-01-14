@@ -28,6 +28,7 @@ trap cleanup SIGINT SIGTERM EXIT
 # create a named pipe to pass input to QEMU
 # since passing tty using docker exec -t option
 # wont allow us to catch SIGINT etc.
+# wee need to catch it since we cant exit otherwise
 PIPE=$(mktemp -u)
 mkfifo $PIPE
 
