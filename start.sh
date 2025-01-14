@@ -13,7 +13,7 @@ docker compose up -d
 container_name=$(docker compose ps --format json | jq -r '.Name')
 echo "Container name: $container_name"
 
-docker exec $container_name make
+docker exec "$container_name" make
 
 # function to handle cleanup on exit
 cleanup() {
@@ -30,15 +30,15 @@ trap cleanup SIGINT SIGTERM EXIT
 # wont allow us to catch SIGINT etc.
 # wee need to catch it since we cant exit otherwise
 PIPE=$(mktemp -u)
-mkfifo $PIPE
+mkfifo "$PIPE"
 
 # run QEMU in the container with input from the named pipe
-cat $PIPE | docker exec -i $container_name make CPUS=$CPUS qemu-nox &
+cat "$PIPE" | docker exec -i "$container_name" make CPUS="$CPUS" qemu-nox &
 
 # pass input to the named pipe
 while true; do
   read -r input
-  echo "$input" > $PIPE
+  echo "$input" > "$PIPE"
 done
 
 # wait for QEMU process to finish
