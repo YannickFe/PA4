@@ -37,7 +37,7 @@ cat $PIPE | docker exec -i $container_name make CPUS=$CPUS qemu-nox &
 
 # pass input to the named pipe
 while true; do
-  read input
+  read -r input
   echo "$input" > $PIPE
 done
 
